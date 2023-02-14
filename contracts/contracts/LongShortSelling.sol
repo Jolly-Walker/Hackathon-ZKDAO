@@ -4,7 +4,7 @@ pragma solidity "0.8.17";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./Interface/IPool.sol";
 
-contract AaveShortSeller {
+contract AaveLongShortSeller {
 
     address supplyToken;
     address borrowToken;
