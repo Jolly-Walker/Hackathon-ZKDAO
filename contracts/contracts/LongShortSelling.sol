@@ -5,6 +5,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "openzeppelin-solidity/contracts/token/ERC20/IERC20.sol";
 import "./Interface/IPool.sol";
 import "@aave/protocol-v2/contracts/interfaces";
+import {ILendingPoolAddressesProvider} from './ILendingPoolAddressesProvider.sol';
 
 
 
@@ -23,24 +24,30 @@ contract AaveLongShortSeller is Ownable {
         leverageAmt = _leverageAmt;
 
         lendingPool = LendingPool("0x7d2768de32b0b80b7a3454c06bdac94a69ddc7a9");
-        usdt = IERC20("0x55d398326f99059fF775485246999027B3197955");
-        btc = IERC20("0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c");
+        supplyToken = IERC20(_supplyToken);
+        borrowToken = IERC20(_borrowToken);
 
     }
 
     function depositUSDT(uint _amount) public onlyOwner {
 
-        lendingPool.deposit(address(usdt), _amount, msg.sender, 0);
+        lendingPool.deposit(address(supplyToken), _amount, msg.sender, 0);
     }
 
     function withdrawUSDT(uint _amount) public onlyOwner{
-        lendingPool.withdraw(address(usdt), _amount, msg.sender);
+        lendingPool.withdraw(address(supplyToken), _amount, msg.sender);
 
     }
 
     function borrowBtc(uint _amount) public onlyOwner{
 
-        lendingPool.borrow(address(btc), _amount, 1, 0, msg.sender);
+        lendingPool.borrow(address(borrowToken), _amount, 1, 0, msg.sender);
+    }
+
+    function print() public view {
+        console.log(supplyToken);
+        console.log(borrowToken);
+        console.log(leverageAmt);
     }
 
 }

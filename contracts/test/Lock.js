@@ -22,10 +22,24 @@ describe("Lock", function () {
     const Lock = await ethers.getContractFactory("Lock");
     const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
 
+
+
+
+
+
     return { lock, unlockTime, lockedAmount, owner, otherAccount };
   }
 
   describe("Deployment", function () {
+    before(async function(){
+      usdt = "0x55d398326f99059fF775485246999027B3197955";
+      btc = "0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c";
+      const shortContract = await ethers.getContractFactory("LongShortSelling");
+      const ShortContract = await shortContract.deploy(usdt,btc,300);
+    })
+    it("Deploy LongShortSelling", async function(){
+      
+    })
     it("Should set the right unlockTime", async function () {
       const { lock, unlockTime } = await loadFixture(deployOneYearLockFixture);
 
