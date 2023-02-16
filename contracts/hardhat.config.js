@@ -1,4 +1,5 @@
 require("@nomicfoundation/hardhat-toolbox");
+require("@nomicfoundation/hardhat-chai-matchers");
 const {ethRPCNode} = require("./secrets.json");
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
