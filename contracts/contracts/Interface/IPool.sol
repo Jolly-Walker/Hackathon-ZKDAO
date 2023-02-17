@@ -636,3 +636,7 @@ interface IPool {
     uint16 referralCode
   ) external;
 }
+
+interface AaveOracle {
+  function getAssetPrice(address asset) external view returns (uint256);
+}
